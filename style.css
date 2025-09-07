@@ -77,8 +77,16 @@ body {
 }
 
 section {
-    min-height: 100vh;
-    padding: 10rem 9% 2rem;
+  min-height: 100vh;
+  padding: 10rem 9% 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .home {
@@ -124,7 +132,7 @@ section {
     background-position: -33rem 0;
 }
 
-.home.show-animate .home-content .text-animate h3 {
+.home .home-content .text-animate h3 {
     animation: homeBgText 6s linear infinite;
     animation-delay: 2s;
 }
@@ -140,7 +148,7 @@ section {
     z-index: -1;
 }
 
-.home.show-animate .home-content .text-animate h3::before {
+.home .home-content .text-animate h3::before {
     animation: homeCursorText 6s linear infinite;
     animation-delay: 2s;
 }
@@ -658,7 +666,7 @@ span {
 .logo .animate,
 .navbar .animate,
 #menu-icon .animate,
-.home.show-animate .animate{
+.home .animate{
     animation: showRight 1s ease forwards;
     animation-delay: calc(.3s * var(--i));
 }
@@ -677,11 +685,11 @@ section:nth-child(odd) .animate.scroll {
     width: 105%;
 }
 
-.about.show-animate .animate.scroll,
-.education.show-animate .animate.scroll,
-.education.show-animate .education-box .animate.scroll,
-.skills.show-animate .animate.scroll,
-.contact.show-animate .animate.scroll {
+.about .animate.scroll,
+.education .animate.scroll,
+.education .education-box .animate.scroll,
+.skills .animate.scroll,
+.contact .animate.scroll {
     transition-delay: calc(.3s * var(--i));
     width: 0;
 }

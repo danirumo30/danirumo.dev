@@ -1,4 +1,4 @@
-// togle icon navbar
+// toggle icon navbar
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
@@ -7,40 +7,40 @@ menuIcon.onclick = () => {
     navbar.classList.toggle('active');
 }
 
-// scroll sections
-let sections = document.querySelectorAll('section');
-let navLinks = document.querySelectorAll('header nav a');
+// sections and nav links
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('header nav a');
+const visibility = new Map();
 
-window.onscroll = () => {
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-    });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const id = entry.target.getAttribute('id');
+    visibility.set(id, entry.intersectionRatio);
 
-    sections.forEach(section => {
-        let top = window.scrollY;
-        let offset = section.offsetTop - 100;
-        let height = section.offsetHeight;
-        let id = section.getAttribute('id');
+    if (entry.intersectionRatio > 0.01) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
 
-        if (top >= offset && top < offset + height) {
-            //active navbar links 
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-            });
-            //active sections for animation
-            section.classList.add('show-animate');
-        } else {
-            section.classList.remove('show-animate');
-        }
-    });
+  let maxId = null, maxRatio = 0;
+  visibility.forEach((ratio, id) => {
+    if (ratio > maxRatio) { maxRatio = ratio; maxId = id; }
+  });
+  if (maxRatio > 0 && maxId) {
+    navLinks.forEach(link => link.classList.remove('active'));
+    const active = document.querySelector(`header nav a[href*=${maxId}]`);
+    if (active) active.classList.add('active');
+  }
+}, { threshold: [0, 0.01, 0.25, 0.5, 0.75, 1] });
 
-    // sticky header
-    let header = document.querySelector('header');
+sections.forEach(s => observer.observe(s));
 
-    header.classList.toggle('sticky', window.scrollY > 100);
-
-    // remove icon when section is selected
-    menuIcon.classList.remove('bx-x');
-    navbar.classList.remove('active');
-}
+// sticky header + close menu on scroll
+window.addEventListener('scroll', () => {
+  let header = document.querySelector('header');
+  header.classList.toggle('sticky', window.scrollY > 100);
+  menuIcon.classList.remove('bx-x');
+  navbar.classList.remove('active');
+});
