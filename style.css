@@ -224,6 +224,8 @@ section.show {
     width: 100px;
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+    width: auto;
 }
 
 .home-sci a {
