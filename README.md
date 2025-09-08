@@ -12,7 +12,7 @@ Soy un **Backend Developer** especializado en Java, con conocimientos en desarro
 - **Edad:** 21 años  
 - **Fecha de nacimiento:** 30/04/2004  
 - **Ubicación:** Fuenlabrada, Madrid, España  
-- **Nivel de inglés:** B2  
+- **Nivel de inglés:** B1
 
 ---
 
