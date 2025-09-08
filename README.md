@@ -34,7 +34,7 @@ Este proyecto está creado para mostrar mis trabajos y capacidades como desarrol
 
 ## Visitamé!
 
-https://danirumo30.github.io/Danirumo.github.io/
+https://danirumo30.github.io/danirumo.dev/
 
 ---
 
